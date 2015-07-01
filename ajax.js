@@ -369,11 +369,12 @@ $('#copytext2').click(function(){
 		clip.setText( $('input[name="176"]').val());
 	});
 	clip.addEventListener('complete', function(client, text) {
-		
+		$("#report2").text("Copied text to clipboard").show().fadeOut(3000); 
 	});
 });
 
 $('#SelectAll2').click(function(){
 	$('input[name="176"]').show();
 	selectAllText($('input[name="176"]'));
+	$("#report2").text("All text was selected").show().fadeOut(3000); 
 });
