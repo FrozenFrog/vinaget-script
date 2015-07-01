@@ -359,3 +359,21 @@ $('#copytext').click(function(){
 		$("#report").text("Copied text to clipboard").show().fadeOut(3000); 
 	});
 });
+
+$('#copytext2').click(function(){
+	var clip = new ZeroClipboard.Client();
+	var lastTd = $(this);
+	clip.glue(lastTd[0]);
+	clip.addEventListener('mouseOver', function (client) {
+	/* update the text on mouse over */
+		clip.setText( $('input[name="176"]').val());
+	});
+	clip.addEventListener('complete', function(client, text) {
+		
+	});
+});
+
+$('#SelectAll2').click(function(){
+	$('input[name="176"]').show();
+	selectAllText($('input[name="176"]'));
+});
