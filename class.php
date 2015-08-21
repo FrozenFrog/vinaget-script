@@ -1715,8 +1715,7 @@ class Tools_get extends getinfo
 	{
 		$filename = urldecode($filename);
 		$filename = Tools_get::uft8html2utf8($filename);
-		$filename = preg_replace("/(\]|\[|\@|\"\;\?\=|\"|=|\*|UTF-8|\')/", "", $filename);
-		$filename = preg_replace("/(HTTP|http|WWW|www|\.html|\.htm)/i", "", $filename);
+		$filename = preg_replace("/(\"\;\?\=|\"|=|\*|UTF-8|\')/", "", $filename);		$filename = preg_replace("/(HTTP|http|WWW|www|\.html|\.htm)/i", "", $filename);
 		$filename = str_replace($this->banned, '.xxx', $filename);
 		if (empty($filename) == true) $filename = substr(md5(time() . $url) , 0, 10);
 		return $filename;
