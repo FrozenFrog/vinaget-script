@@ -4,12 +4,12 @@ class dl_rapidgator_net extends Download {
 
 	public function CheckAcc($cookie){
 		$data = $this->lib->curl("http://rapidgator.net/profile/index", "lang=en;{$cookie}", "");
-		$account_type = $this->lib->cut_str(cut_str($data, "Account type</td>", '<tr>'), '<td>', '</td>');
+		$account_type = $this->lib->cut_str($this->lib->cut_str($data, "Account type</td>", '<tr>'), '<td>', '</td>');
 		if(stristr(trim($account_type), '<a class="orange" href="/article/premium">Upgrade to premium</a>')) return array(false, "accfree");
 		elseif(stristr(trim($account_type), "Premium")) {
 			$oob = $this->lib->curl("http://rapidgator.net/file/30703c88109d2a7b61a301eb6b324a95", "lang=en;{$cookie}", "");
 			if(stristr($oob, 'You have reached quota of downloaded information')) return array(true, "Until ".$this->lib->cut_str($data, 'Premium till','<span'). "<br> Account out of BW");
-			else return array(true, "Until ".$this->lib->cut_str($data, 'Premium till','<span')." <br/>Bandwith available:" .$this->lib->cut_str(cut_str($data, 'Bandwith available</td>','<div style='), '<td>','</br>'));
+			else return array(true, "Until ".$this->lib->cut_str($data, 'Premium till','<span')." <br/>Bandwith available:" .$this->lib->cut_str($this->lib->cut_str($data, 'Bandwith available</td>','<div style='), '<td>','</br>'));
 		}
 		else return array(false, "accinvalid");
 	}
