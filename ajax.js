@@ -191,7 +191,7 @@ function donate(obj){
 			url: "add.php?rand="+ Math.random(),
 			data: "type="+$("#type").val()+"&accounts="+account,
 			success: function(html) {
-				if(html == 'true') {
+				if(/true$/.test(html)) {
                     $("#wait").html('');
 					$('#accounts').val("");
 					$("#wait").fadeOut(1100, 'swing');
