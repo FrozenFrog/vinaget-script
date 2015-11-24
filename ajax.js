@@ -379,5 +379,8 @@ $(document).ready(function() {
 	clipboard.on('success', function(e) {
 		$("#report2").text("Copied text to clipboard").show().fadeOut(3000);
 	});
+	clipboard.on('error', function(e) {
+		$("#report2").text("Failed to copy").show().fadeOut(3000);
+	});
 });
 
