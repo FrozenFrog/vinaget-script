@@ -367,7 +367,7 @@ $.getScript( "https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboar
 });
 
 $(document).ready(function() {
-	new Clipboard('#copytext2', {
+	var clipboard = new Clipboard('#copytext2', {
 		text: function(trigger, bb) {
 			bb = '';
 			$("input[name*='176']").each(function () {
@@ -375,7 +375,9 @@ $(document).ready(function() {
 			});
 			return bb;
 		}
-
+	});
+	clipboard.on('success', function(e) {
+		$("#report2").text("Copied text to clipboard").show().fadeOut(3000);
 	});
 });
 
