@@ -360,18 +360,22 @@ $('#copytext').click(function(){
 	});
 });
 
-$('#copytext2').click(function(){
-	var clip = new ZeroClipboard.Client();
-	var lastTd = $(this);
-	clip.glue(lastTd[0]);
-	clip.addEventListener('mouseOver', function (client) {
-	/* update the text on mouse over */
-		clip.setText( $('input[name="176"]').val());
-	});
-	clip.addEventListener('complete', function(client, text) {
-		$('input[name="176"]').show();
-		selectAllText($('input[name="176"]'));
-		$("#report2").text("Copied text to clipboard").show().fadeOut(3000); 
+// load clipboardjs before to prevent error
+$.holdReady( true );
+$.getScript( "https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js", function() {
+	$.holdReady( false );
+});
+
+$(document).ready(function() {
+	new Clipboard('#copytext2', {
+		text: function(trigger, bb) {
+			bb = '';
+			$("input[name*='176']").each(function () {
+				bb += $(this).val();
+			});
+			return bb;
+		}
+
 	});
 });
 
